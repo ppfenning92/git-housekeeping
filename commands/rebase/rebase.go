@@ -121,6 +121,14 @@ func (m model) updateMain() {
 }
 
 func (m model) rebase() {
+	for _, branch := range m.branches {
+		// gco branch
+		commands.CheckoutGitBranch(branch)
+		commands.RebaseGitBranch(branch)
+
+		log.Infof("rebased %s", branch)
+		// rebase
+	}
 }
 
 func Rebase(auto bool) {

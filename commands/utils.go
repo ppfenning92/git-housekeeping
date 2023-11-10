@@ -13,3 +13,11 @@ func CheckoutGitBranch(branchName string) {
 		log.Fatalf("Cannot checkout branch '%s'", branchName)
 	}
 }
+
+func RebaseGitBranch(branchName string, flags ...string) {
+	cmd := exec.Command("git", append([]string{"rebase"}, flags...)...)
+	_, err := cmd.Output()
+	if err != nil {
+		log.Fatalf("Cannot execute '%s'. Error: %s", cmd, err)
+	}
+}
