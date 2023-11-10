@@ -35,6 +35,6 @@ func main() {
 	}
 
 	if err := app.Run(os.Args); err != nil {
-		log.Fatal("Unexpected error: %v", err)
+		log.Fatalf("Unexpected error: %v", err)
 	}
 }
