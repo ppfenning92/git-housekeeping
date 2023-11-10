@@ -23,7 +23,7 @@ func RebaseGitBranch(branchName string, flags ...string) {
 }
 
 func GitPush(branchName string) {
-	cmd := exec.Command("git", "push")
+	cmd := exec.Command("git", "push", "--set-upstream", "origin", branchName)
 	if err := cmd.Run(); err != nil {
 		log.Fatalf("Cannot push branch '%s'", branchName)
 	}
