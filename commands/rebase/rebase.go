@@ -150,6 +150,8 @@ func Rebase(auto bool) {
 	fmt.Println(data)
 	data.updateMain()
 
+	data.rebase()
+
 	p := tea.NewProgram(data)
 	if _, err := p.Run(); err != nil {
 		commands.CheckoutGitBranch(data.currentBranch)
