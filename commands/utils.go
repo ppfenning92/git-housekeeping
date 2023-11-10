@@ -15,7 +15,8 @@ func CheckoutGitBranch(branchName string) {
 }
 
 func RebaseGitBranch(branchName string, flags ...string) {
-	cmd := exec.Command("git", append([]string{"rebase", branchName}, flags...)...)
+	cmd := exec.Command("git", "merge", branchName)
+	// cmd := exec.Command("git", append([]string{"rebase", branchName}, flags...)...)
 	_, err := cmd.Output()
 	if err != nil {
 		log.Fatalf("Cannot execute '%s'. Error: %s", cmd, err)
