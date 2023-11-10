@@ -21,3 +21,10 @@ func RebaseGitBranch(branchName string, flags ...string) {
 		log.Fatalf("Cannot execute '%s'. Error: %s", cmd, err)
 	}
 }
+
+func GitPush(branchName string) {
+	cmd := exec.Command("git", "push")
+	if err := cmd.Run(); err != nil {
+		log.Fatalf("Cannot push branch '%s'", branchName)
+	}
+}

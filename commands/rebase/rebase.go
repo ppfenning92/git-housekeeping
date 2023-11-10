@@ -125,7 +125,7 @@ func (m model) rebase() {
 		// gco branch
 		commands.CheckoutGitBranch(branch)
 		commands.RebaseGitBranch(branch)
-
+		commands.GitPush(branch)
 		log.Infof("rebased %s", branch)
 		// rebase
 	}
