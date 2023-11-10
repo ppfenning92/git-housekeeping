@@ -13,10 +13,10 @@ type model struct {
 	status     int
 	err        error
 	workingDir string
+	auto       bool
 }
 
 func (m model) Init() tea.Cmd {
-	log.Warn(m.workingDir)
 	return nil
 }
 
@@ -37,7 +37,7 @@ func (m model) View() string {
 	return ""
 }
 
-func Rebase() {
+func Rebase(auto bool) {
 	path, err := os.Getwd()
 	if err != nil {
 		log.Error("Cannot determine current working directory. Error: %v", err)
@@ -45,24 +45,20 @@ func Rebase() {
 	}
 	data := model{
 		workingDir: path,
+		auto:       auto,
 	}
 
 	gst := exec.Command(
 		"git",
 		"-P",
-		// fmt.Sprintf("--work-tree=%s", data.workingDir),
-		// fmt.Sprintf("--git-dir=\"%s/.git\"", data.workingDir),
 		"status",
 	)
 
-	out, err := gst.Output()
-	if err != nil {
+	if _, err := gst.Output(); err != nil {
 		log.Fatal(
-			fmt.Sprintf("Command: '%s' failed: %v", gst.String(), err),
+			fmt.Sprintf("'%v' is not a git repository", data.workingDir),
 		)
 	}
-
-	fmt.Printf(string(out))
 
 	p := tea.NewProgram(data)
 	if _, err := p.Run(); err != nil {
