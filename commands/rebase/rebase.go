@@ -124,8 +124,13 @@ func (m model) rebase() {
 	for _, branch := range m.branches {
 		// gco branch
 		commands.CheckoutGitBranch(branch)
+<<<<<<< Updated upstream
 		commands.RebaseGitBranch(branch)
 		commands.GitPush(branch)
+=======
+		commands.RebaseGitBranch(m.mainBranch)
+
+>>>>>>> Stashed changes
 		log.Infof("rebased %s", branch)
 		// rebase
 	}
