@@ -14,12 +14,13 @@ func CheckoutGitBranch(branchName string) {
 	}
 }
 
-func RebaseGitBranch(branchName string, flags ...string) {
+func MergeGitBranch(branchName string, flags ...string) {
 	cmd := exec.Command("git", "merge", branchName)
-	// cmd := exec.Command("git", append([]string{"rebase", branchName}, flags...)...)
 	_, err := cmd.Output()
 	if err != nil {
-		log.Fatalf("Cannot execute '%s'. Error: %s", cmd, err)
+		log.Warnf("Cannot merge branch '%s'. Aborting merge", branchName, err)
+		abort := exec.Command("git", "merge", "--abort")
+		abort.Run()
 	}
 }
 
