@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	var auto bool
+	var interactive bool
 
 	app := &cli.App{
 		Commands: []*cli.Command{
@@ -23,11 +23,11 @@ func main() {
 						Name:    "auto",
 						Aliases: []string{"a"},
 						Usage:   "Rebase all branches automatically",
-						Value:   auto,
+						Value:   interactive,
 					},
 				},
 				Action: func(context *cli.Context) error {
-					rebase.Rebase(auto)
+					rebase.Rebase(interactive)
 					return nil
 				},
 			},
