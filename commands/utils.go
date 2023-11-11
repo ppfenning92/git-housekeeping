@@ -18,7 +18,7 @@ func MergeGitBranch(branchName string, flags ...string) {
 	cmd := exec.Command("git", "merge", branchName)
 	_, err := cmd.Output()
 	if err != nil {
-		log.Warnf("Cannot merge branch '%s'. Aborting merge", branchName, err)
+		log.Warnf("Cannot merge branch '%s'. Aborting merge", branchName)
 		abort := exec.Command("git", "merge", "--abort")
 		abort.Run()
 	}

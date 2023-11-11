@@ -124,9 +124,7 @@ func (m model) rebase() {
 	for _, branch := range m.branches {
 		// gco branch
 		commands.CheckoutGitBranch(branch)
-		if err := commands.MergeGitBranch(m.mainBranch); err != nil {
-			log.Warn("Could not update")
-		}
+		commands.MergeGitBranch(m.mainBranch)
 		commands.GitPush(branch)
 
 		log.Infof("rebased %s", branch)
