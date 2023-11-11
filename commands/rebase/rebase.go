@@ -160,4 +160,5 @@ func Rebase(auto bool) {
 		os.Exit(1)
 	}
 	commands.CheckoutGitBranch(data.currentBranch)
+	os.Exit(0)
 }
